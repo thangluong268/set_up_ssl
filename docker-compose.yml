@@ -15,10 +15,10 @@ services:
     volumes:
       - ./public_html:/public_html
       - ./conf.d:/etc/nginx/conf.d/
-      - ./certbot-fe/conf/:/etc/nginx/ssl/
-      - ./certbot-fe/data:/usr/share/nginx/html/letsencrypt
-      - ./certbot-be/conf/:/etc/nginx/ssl/
-      - ./certbot-be/data:/usr/share/nginx/html/letsencrypt
+      - ./certbot/conf/:/etc/nginx/ssl/
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+      # - ./certbot-be/conf/:/etc/nginx/ssl/
+      # - ./certbot-be/data:/usr/share/nginx/html/letsencrypt
 
   dtex-fe:
     container_name: dtex-fe
@@ -46,9 +46,9 @@ services:
     image: "infinityofspace/certbot_dns_duckdns:latest"
     container_name: "certbot-fe"
     volumes:
-      - ./certbot-fe/conf/:/etc/letsencrypt
-      - ./certbot-fe/logs/:/var/log/letsencrypt
-      - ./certbot-fe/data:/usr/share/nginx/html/letsencrypt
+      - ./certbot/conf/:/etc/letsencrypt
+      - ./certbot/logs/:/var/log/letsencrypt
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
     command: certonly
       --non-interactive
       --agree-tos
@@ -63,9 +63,9 @@ services:
     image: "infinityofspace/certbot_dns_duckdns:latest"
     container_name: "certbot-be"
     volumes:
-      - ./certbot-be/conf/:/etc/letsencrypt
-      - ./certbot-be/logs/:/var/log/letsencrypt
-      - ./certbot-be/data:/usr/share/nginx/html/letsencrypt
+      - ./certbot/conf/:/etc/letsencrypt
+      - ./certbot/logs/:/var/log/letsencrypt
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
     command: certonly
       --non-interactive
       --agree-tos
