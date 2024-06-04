@@ -4,7 +4,26 @@ services:
   helloworld:
       container_name: helloworld
       image: crccheck/hello-world
-  
+      expose:
+          - 8000
+
+  certbot:
+    image: "infinityofspace/certbot_dns_duckdns:latest"
+    container_name: "certbot_dns_duckdns"
+    volumes:
+      - ./certbot/conf/:/etc/letsencrypt
+      - ./certbot/logs/:/var/log/letsencrypt
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+    command: certonly
+      --non-interactive
+      --agree-tos
+      --email luongthangg268@gmail.com
+      --preferred-challenges dns
+      --authenticator dns-duckdns
+      --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
+      --dns-duckdns-propagation-seconds 30
+      -d lxt.duckdns.org
+    
   nginx:
     image: nginx:1.14.2-alpine
     restart: always
@@ -18,10 +37,4 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/
       - ./certbot/data:/usr/share/nginx/html/letsencrypt
 
-  certbot:
-    image: certbot/certbot:latest
-    command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email luongthangg268@gmail.com --agree-tos --no-eff-email -d lxt.duckdns.org
-    volumes:
-      - ./certbot/conf/:/etc/letsencrypt
-      - ./certbot/logs/:/var/log/letsencrypt
-      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+      
