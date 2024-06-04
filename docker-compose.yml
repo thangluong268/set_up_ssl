@@ -5,10 +5,12 @@ services:
     container_name: nginx
     image: nginx:1.14.2-alpine
     restart: always
-    # links:
-    #   - "dtex-fe:dtex-fe"
-    # depends_on:
-    #   - "dtex-fe"
+    links:
+      - "dtex-fe:dtex-fe"
+      - "dtex-be:dtex-be"
+    depends_on:
+      - "dtex-fe"
+      - "dtex-be"
     ports:
       - 80:80
       - 443:443
@@ -48,7 +50,7 @@ services:
     volumes:
       - ./certbot-fe/conf/:/etc/letsencrypt
       - ./certbot-fe/logs/:/var/log/letsencrypt
-      - ./certbot-fe/data:/usr/share/nginx/html/letsencrypt
+      - ./certbot-fe/data:/usr/share/nginx/fe/html/letsencrypt
     command: certonly
       --non-interactive
       --agree-tos
@@ -58,6 +60,7 @@ services:
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
       --dns-duckdns-propagation-seconds 30
       -d dtex.duckdns.org
+      --staging
 
   certbot-be:
     image: "infinityofspace/certbot_dns_duckdns:latest"
@@ -65,7 +68,7 @@ services:
     volumes:
       - ./certbot-be/conf/:/etc/letsencrypt
       - ./certbot-be/logs/:/var/log/letsencrypt
-      - ./certbot-be/data:/usr/share/nginx/html/letsencrypt
+      - ./certbot-be/data:/usr/share/nginx/be/html/letsencrypt
     command: certonly
       --non-interactive
       --agree-tos
@@ -75,6 +78,7 @@ services:
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
       --dns-duckdns-propagation-seconds 30
       -d dtex-api.duckdns.org
+      --staging
   
 
       
