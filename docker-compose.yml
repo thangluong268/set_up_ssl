@@ -60,7 +60,7 @@ services:
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
       --dns-duckdns-propagation-seconds 30
       -d dtex.duckdns.org
-      --staging
+      # --staging
 
   certbot-be:
     image: "infinityofspace/certbot_dns_duckdns:latest"
@@ -78,7 +78,7 @@ services:
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
       --dns-duckdns-propagation-seconds 30
       -d dtex-api.duckdns.org
-      --staging
+      # --staging
   
 
       
