@@ -1,11 +1,32 @@
 version: '3.7'
 
 services:
-  helloworld:
-      container_name: helloworld
-      image: crccheck/hello-world
-      expose:
-          - 8000
+  nginx:
+    image: nginx:1.14.2-alpine
+    restart: always
+    links:
+      - "dtex-fe:dtex-fe"
+    depends_on:
+      - "dtex-fe"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./public_html:/public_html
+      - ./conf.d:/etc/nginx/conf.d/
+      - ./certbot/conf/:/etc/nginx/ssl/
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+
+  dtex-fe:
+    container_name: dtex-fe
+    image: thang268/dtex-fe:latest
+    restart: always
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   certbot:
     image: "infinityofspace/certbot_dns_duckdns:latest"
@@ -23,20 +44,6 @@ services:
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
       --dns-duckdns-propagation-seconds 30
       -d dtex.duckdns.org
-    
-  nginx:
-    image: nginx:1.14.2-alpine
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./public_html:/public_html
-      - ./conf.d:/etc/nginx/conf.d/
-      - ./certbot/conf/:/etc/nginx/ssl/
-      - ./certbot/data:/usr/share/nginx/html/letsencrypt
-    depends_on:
-      - helloworld
-      - certbot
+  
 
       
