@@ -58,7 +58,7 @@ services:
       --preferred-challenges dns
       --authenticator dns-duckdns
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
-      --dns-duckdns-propagation-seconds 30
+      --dns-duckdns-propagation-seconds 60
       -d dtex.duckdns.org
       # --staging
 
@@ -76,7 +76,7 @@ services:
       --preferred-challenges dns
       --authenticator dns-duckdns
       --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
-      --dns-duckdns-propagation-seconds 30
+      --dns-duckdns-propagation-seconds 60
       -d dtex-api.duckdns.org
       # --staging
   
