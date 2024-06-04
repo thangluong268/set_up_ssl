@@ -23,4 +23,4 @@ services:
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email luongthangg268@gmail.com -d lxt.duckdns.org --agree-tos
+    # command: certonly --webroot -w /var/www/certbot --force-renewal --email luongthangg268@gmail.com -d lxt.duckdns.org --agree-tos
