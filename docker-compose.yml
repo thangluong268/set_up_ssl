@@ -57,9 +57,9 @@ services:
       --email luongthangg268@gmail.com
       --preferred-challenges dns
       --authenticator dns-duckdns
-      --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
+      --dns-duckdns-token 86aa364a-d7ce-4069-b9ad-fc328a6d8889
       --dns-duckdns-propagation-seconds 60
-      -d dtex.duckdns.org
+      -d dtex2.duckdns.org
       # --staging
 
   certbot-be:
@@ -75,9 +75,9 @@ services:
       --email luongthangg268@gmail.com
       --preferred-challenges dns
       --authenticator dns-duckdns
-      --dns-duckdns-token 9bf4842e-2f56-4cd5-8574-6dc1782d32cb
+      --dns-duckdns-token 86aa364a-d7ce-4069-b9ad-fc328a6d8889
       --dns-duckdns-propagation-seconds 60
-      -d dtex-api.duckdns.org
+      -d dtex2-api.duckdns.org
       # --staging
   
 
